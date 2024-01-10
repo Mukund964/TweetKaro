@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const tagSchema = new mongoose.Schema({
-    title :{
+    title:{
         type: String,
         required: true
     },
