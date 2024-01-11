@@ -3,22 +3,16 @@ import config from './config/config.js';
 import {connect} from './config/database.js'
 import bodyParser from 'body-parser';
 import apiRoutes from './Routes/index.js'
-import UserRepository from './repository/userRepository.js';
+import {likeService} from './services/likeService.js';
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-const userRepo = new UserRepository();
+const likeservice = new likeService();
 const PORT = config.PORT;
 app.listen(PORT,async ()=>{
     await connect();
-    const data = {
-        'email' : 'abc@123',
-        'password':'1234567890',
-        'name':"admin",
-    }
-    const res = await userRepo.create(data);
-    console.log(res);
+    await likeservice.toggle('659c2a5e96713dc0098a87a8','tweet','659edffb9e1007ce6995664e');
     app.use('/api',apiRoutes);
     console.log(`server is running at ${PORT}`);
 });

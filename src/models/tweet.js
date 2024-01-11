@@ -9,6 +9,10 @@ const tweetSchema = new mongoose.Schema({
     hashtags: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'hashtag'
+    }],
+    likes :[{
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'Like'
     }]
 },{timestamps:true});
 const tweet = mongoose.model('Tweet',tweetSchema);
