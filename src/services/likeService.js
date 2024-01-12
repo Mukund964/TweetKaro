@@ -10,6 +10,7 @@ class likeService{
     }
 
     async toggle(modelId,modelType,userId){
+        
         if(modelType=="tweet"){
             var likeable = await this.tweetRepository.find(modelId);  // this func only works on mongoose object (populate({path}) not on js object mongoose object ->> takes time in conversion : 'likes'});
             //console.log(likeable);
