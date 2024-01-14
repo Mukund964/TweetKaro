@@ -1,17 +1,18 @@
-import commentRepository from "../repository/commentRepository.js";
-import tweetRepository from "../repository/tweetRepository.js"
+import { model } from 'mongoose';
+import {commentRepository} from '../repository/commentRepository.js';
+import {TweetRepository} from '../repository/tweetRepository.js'
 
 class commentService{
     constructor(){
         this.commentRepo = new commentRepository();
-        this.tweetRepo = new tweetRepository();
+        this.tweetRepo = new TweetRepository();
     }
     async createComment(modelId,modelType,userId,content){
         try {
             if(modelType=='Tweet'){
                 var commentable = await this.tweetRepo.find(modelId);
             }else if(modelType =='Comment'){
-                commentable = await this.commentRepo.get(modelId);
+                commentable = await this.commentRepo.find(modelId);
             }else{
                 throw {error : "Unknow Type"};
             }
@@ -19,8 +20,12 @@ class commentService{
                 content : content,
                 userId : userId,
                 commentable : commentable.id,
-                modelType:modelType,
+                onModel:modelType,
             });
+            if(modelType == "Comment"){
+                commentable.comments.push(newComment);
+                console.log(commentable.comments[0]);
+            }
             return newComment;
         } catch (error) {
             throw error;
