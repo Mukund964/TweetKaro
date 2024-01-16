@@ -9,9 +9,11 @@ class commentService{
     }
     async createComment(modelId,modelType,userId,content){
         try {
+
             if(modelType=='Tweet'){
                 var commentable = await this.tweetRepo.find(modelId);
             }else if(modelType =='Comment'){
+                
                 commentable = await this.commentRepo.find(modelId);
             }else{
                 throw {error : "Unknow Type"};
@@ -21,11 +23,10 @@ class commentService{
                 userId : userId,
                 commentable : commentable.id,
                 onModel:modelType,
+                comments: []
             });
-            if(modelType == "Comment"){
-                commentable.comments.push(newComment);
-                console.log(commentable.comments[0]);
-            }
+            commentable.comments.push(newComment);
+            await commentable.save();
             return newComment;
         } catch (error) {
             throw error;

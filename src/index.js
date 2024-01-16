@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 const PORT = config.PORT;
 app.listen(PORT,async ()=>{
     await connect();
-    await comment.createComment('65a3aaadc887942305f59c5e','Comment','659edffb9e1007ce6995664e','Nice');
+    //await comment.createComment('65a3aaadc887942305f59c5e','Comment','659edffb9e1007ce6995664e','Nice');
     app.use('/api',apiRoutes);
     console.log(`server is running at ${PORT}`);
 });
