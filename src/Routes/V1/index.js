@@ -6,7 +6,7 @@ import { signUp } from '../../controller/userController.js';
 const router = express.Router();
 
 
-router.post('/user',signUp);
+router.post('/signup',signUp);
 router.post('/tweets', Create);
 router.post('/likes/toggle',toggleLike);
 router.post('/comment',create);
