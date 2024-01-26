@@ -20,4 +20,24 @@ const signUp = async (req,res) =>{
     }
 }
 
-export {signUp};
+const signIn = async (req,res)=>{
+    try {
+        const token = await Userservice.login(req.body);
+        res.status(200).json({
+            message: "Logged in successfully",
+            data: token,
+            error : {},
+            success : true
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message : 'Some error occured',
+            data : {},
+            error : {error},
+            success : false
+        })
+    }
+}
+
+export {signUp,signIn};

@@ -2,11 +2,12 @@ import express from 'express';
 import {Create} from '../../controller/tweetController.js';
 import { toggleLike } from '../../controller/likeController.js';
 import {create} from '../../controller/commentController.js';
-import { signUp } from '../../controller/userController.js';
+import { signUp,signIn } from '../../controller/userController.js';
 const router = express.Router();
 
 
 router.post('/signup',signUp);
+router.post('/signin',signIn);
 router.post('/tweets', Create);
 router.post('/likes/toggle',toggleLike);
 router.post('/comment',create);
