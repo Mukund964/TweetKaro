@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import config from './config/config.js';
+import {config} from './config/config.js';
 import {connect} from './config/database.js'
 import bodyParser from 'body-parser';
 import {passportAuth}from './middleware/passport-jwt.js';

@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-const config = {
-    PORT : process.env.PORT
+export const config = {
+    PORT : process.env.PORT,
+    key : process.env.AuthKey
 };
-
-export default config;

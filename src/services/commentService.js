@@ -9,9 +9,10 @@ class commentService{
     }
     async createComment(modelId,modelType,userId,content){
         try {
-
+            //console.log(modelId,modelType,userId,content);
             if(modelType=='Tweet'){
                 var commentable = await this.tweetRepo.find(modelId);
+                console.log(commentable);
             }else if(modelType =='Comment'){
                 
                 commentable = await this.commentRepo.find(modelId);
