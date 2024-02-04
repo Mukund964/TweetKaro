@@ -32,3 +32,25 @@ describe('Creating Tweet Tests', ()=> {
     });
 
 });
+
+describe('Getting tweet with limit',()=>{
+    test('test for tweet with limit', async ()=>{
+        const data = {
+            content : "Testing Tweet"
+        }
+        const resultTweet = [
+            {...data, createdAt : '2024-04-02', updatedAt: '2024-04-02'},
+            {...data, createdAt : '2024-04-02', updatedAt: '2024-04-02'},
+            {...data, createdAt : '2024-04-02', updatedAt: '2024-04-02'}
+        ]
+        const response = {resultTweet};
+        response.limit = jest.fn((limit) => response.resultTweet.slice(1,limit));
+        response.skip = jest.fn((offset) => response);
+        const spy = jest.spyOn(tweet,'find').mockImplementation(()=>{
+            return response;
+        })
+        const tweetRepo = new TweetRepository();
+        const Tweet = await tweetRepo.getTweetsLimits(1,3);
+        expect(Tweet).toHaveLength(2);
+    })
+})
