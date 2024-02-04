@@ -3,6 +3,7 @@ import userService from '../services/userService.js'
 const Userservice = new userService();
 const signUp = async (req,res) =>{
     try {
+        console.log("called");
         const user = await Userservice.create(req.body);
         return res.status(200).json({
             message : 'User registered succesfully',
